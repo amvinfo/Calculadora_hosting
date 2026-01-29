@@ -1,0 +1,2696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Hosting Reseller | Versión Pastel Ejecutiva</title>
+    <style>
+        :root {
+            /* Soft pastel color palette */
+            --primary: #a5b4fc;       /* Soft periwinkle blue */
+            --primary-dark: #818cf8;  /* Slightly deeper blue */
+            --primary-light: #c7d2fe; /* Light periwinkle */
+            --secondary: #d8b4fe;     /* Soft lavender */
+            --secondary-dark: #c084fc;/* Deeper lavender */
+            --accent-peach: #f9a886;  /* Soft peach */
+            --accent-mint: #86efac;   /* Soft mint green */
+            --accent-sunshine: #fde68a; /* Soft sunshine yellow */
+            --accent-coral: #f8ad9d;  /* Soft coral */
+            
+            /* Neutral pastels */
+            --background: #fefefe;    /* Pure white background */
+            --background-light: #f9fbfd; /* Very light blue tint */
+            --background-card: #ffffff; /* White cards */
+            --border-color: #e2e8f0;  /* Light gray border */
+            --text-dark: #2d3748;     /* Dark gray text */
+            --text-medium: #4a5568;   /* Medium gray text */
+            --text-light: #718096;    /* Light gray text */
+            
+            /* Semantic colors */
+            --success: #86efac;       /* Soft green */
+            --success-dark: #22c55e;  /* Deeper green */
+            --warning: #fde68a;       /* Soft yellow */
+            --warning-dark: #f59e0b;  /* Deeper yellow */
+            --danger: #fca5a5;        /* Soft red */
+            --danger-dark: #ef4444;   /* Deeper red */
+            
+            /* Typography */
+            --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font-heading: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 20px 30px rgba(0, 0, 0, 0.1);
+            
+            /* Border radius */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: all 0.2s ease;
+            --transition-normal: all 0.3s ease;
+            --transition-slow: all 0.5s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--background-light) 0%, #f0f4ff 100%);
+            padding: 0;
+            min-height: 100vh;
+            transition: var(--transition-normal);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md) var(--spacing-lg);
+            background: linear-gradient(135deg, #e0e7ff 0%, #dbeafe 30%, #f0f4ff 100%);
+            color: var(--text-dark);
+            border-bottom-left-radius: var(--radius-xl);
+            border-bottom-right-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: var(--spacing-2xl);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(165, 180, 252, 0.15) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            z-index: 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary-dark), var(--secondary-dark), var(--accent-peach));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            letter-spacing: -0.5px;
+        }
+        
+        .logo-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.85;
+            max-width: 700px;
+            margin: 0 auto var(--spacing-sm);
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+        }
+        
+        .header-highlight {
+            display: inline-block;
+            background: rgba(249, 168, 134, 0.2);
+            padding: 4px 16px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            margin-top: var(--spacing-sm);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(249, 168, 134, 0.3);
+        }
+        
+        /* Section Styles */
+        .section {
+            background: var(--background-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            transition: var(--transition-normal);
+            border: 1px solid var(--border-color);
+        }
+        
+        .section:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-weight: 700;
+            position: relative;
+            padding-left: 12px;
+        }
+        
+        h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 28px;
+            background: var(--primary);
+            border-radius: var(--radius-sm);
+        }
+        
+        h2 i {
+            color: var(--primary-dark);
+            font-size: 1.4em;
+        }
+        
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-top: var(--spacing-xs);
+            max-width: 800px;
+            line-height: 1.7;
+        }
+        
+        /* Plans Section */
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .plan-card {
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
+            background: var(--background-card);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+        
+        .plan-card.selected {
+            border-color: var(--primary);
+            background: linear-gradient(145deg, rgba(165, 180, 252, 0.12), rgba(199, 210, 254, 0.18));
+            box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.25);
+        }
+        
+        .plan-card .remove-btn {
+            position: absolute;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            background: var(--danger);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: var(--transition-fast);
+            z-index: 10;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .plan-card.selected .remove-btn {
+            display: flex;
+        }
+        
+        .plan-card .remove-btn:hover {
+            background: var(--danger-dark);
+            transform: scale(1.15);
+        }
+        
+        .plan-name {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-dark);
+            min-height: 2.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .plan-price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin: var(--spacing-sm) 0;
+            background: linear-gradient(to right, var(--primary-dark), var(--secondary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 12px 0;
+        }
+        
+        .plan-details {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-top: var(--spacing-xs);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            min-height: 5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .plan-badge {
+            display: inline-block;
+            background: rgba(165, 180, 252, 0.2);
+            color: var(--primary-dark);
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: auto;
+            border: 1px solid var(--primary-light);
+        }
+        
+        .add-plan-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.25);
+            align-self: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .add-plan-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .add-plan-btn:hover::after {
+            left: 100%;
+        }
+        
+        .add-plan-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(139, 92, 246, 0.35);
+        }
+        
+        .add-plan-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .custom-plan-form {
+            display: none;
+            background: var(--background-light);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-top: var(--spacing-lg);
+            border: 1px dashed var(--border-color);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: var(--transition-fast);
+            background: var(--background-card);
+            color: var(--text-dark);
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.25);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: var(--spacing-md) var(--spacing-xl);
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 140px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 3px 10px rgba(139, 92, 246, 0.25);
+        }
+        
+        .btn-secondary {
+            background: var(--background-light);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(to right, var(--danger), var(--danger-dark));
+            color: white;
+        }
+        
+        .selected-plans {
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px dashed var(--border-color);
+        }
+        
+        .selected-plans h3 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .plans-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        
+        .plan-tag {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-weight: 500;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+            font-size: 0.95rem;
+        }
+        
+        .plan-tag .remove-plan {
+            background: rgba(255, 255, 255, 0.35);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition-fast);
+            margin-left: var(--spacing-xs);
+            color: var(--primary-dark);
+            font-size: 16px;
+        }
+        
+        .plan-tag .remove-plan:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.2);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-xl);
+            color: var(--text-light);
+            background: var(--background-light);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-md) 0;
+            border: 1px dashed var(--border-color);
+            font-style: italic;
+        }
+        
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        /* Input Groups */
+        .input-group {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        /* Sliders */
+        .slider-container {
+            margin: var(--spacing-xl) 0;
+            background: var(--background-light);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 12px;
+            border-radius: var(--radius-full);
+            background: var(--border-color);
+            outline: none;
+            transition: var(--transition-fast);
+            margin: 10px 0;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary-dark);
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: var(--transition-fast);
+            border: 3px solid white;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+            background: var(--secondary-dark);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+        
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .summary-item {
+            text-align: center;
+            padding: var(--spacing-lg);
+            background: var(--background-light);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .summary-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .summary-item:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .summary-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+        
+        .summary-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin: var(--spacing-sm) 0;
+            font-family: var(--font-heading);
+        }
+        
+        .summary-label {
+            font-size: 1rem;
+            color: var(--text-medium);
+            font-weight: 500;
+            margin-top: 4px;
+        }
+        
+        /* Price Cards */
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .price-card {
+            background: linear-gradient(145deg, var(--background-light), #f1f5f9);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .price-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(165, 180, 252, 0.08) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-light);
+        }
+        
+        .price-card.best-value {
+            border: 2px solid var(--accent-sunshine);
+            background: linear-gradient(145deg, rgba(253, 230, 138, 0.12), rgba(255, 255, 255, 0.85));
+            box-shadow: 0 0 25px rgba(253, 230, 138, 0.3);
+        }
+        
+        .price-card.best-value::after {
+            content: "MÁS POPULAR";
+            position: absolute;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            background: var(--accent-sunshine);
+            color: var(--text-dark);
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-sm);
+            z-index: 1;
+            border: 2px solid white;
+        }
+        
+        .price-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .price-amount {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin: var(--spacing-sm) 0;
+            position: relative;
+            z-index: 1;
+            font-family: var(--font-heading);
+            background: linear-gradient(to right, var(--primary-dark), var(--secondary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .price-period {
+            color: var(--text-medium);
+            font-size: 1.15rem;
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .price-gb {
+            background: rgba(165, 180, 252, 0.15);
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            margin-top: var(--spacing-sm);
+            font-size: 1rem;
+            color: var(--primary-dark);
+            position: relative;
+            z-index: 1;
+            border: 1px solid var(--primary-light);
+        }
+        
+        .price-discount {
+            background: var(--accent-mint);
+            color: var(--success-dark);
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            margin-top: var(--spacing-sm);
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+            border: 1px solid var(--accent-mint);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        /* Formula Box */
+        .formula {
+            background: rgba(253, 230, 138, 0.15);
+            border-left: 5px solid var(--accent-sunshine);
+            padding: var(--spacing-md) var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .formula::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--accent-sunshine);
+        }
+        
+        /* Viability Analysis */
+        .viability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .viability-item {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            background: var(--background-light);
+            border: 1px solid var(--border-color);
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .viability-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        .viability-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .viability-item.good::before {
+            background: var(--accent-mint);
+        }
+        
+        .viability-item.warning::before {
+            background: var(--accent-sunshine);
+        }
+        
+        .viability-item.critical::before {
+            background: var(--danger);
+        }
+        
+        .viability-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: var(--spacing-sm) 0;
+            font-family: var(--font-heading);
+        }
+        
+        .viability-good {
+            color: var(--success-dark);
+            background: linear-gradient(to right, var(--success-dark), var(--accent-mint));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .viability-warning {
+            color: var(--warning-dark);
+            background: linear-gradient(to right, var(--warning-dark), var(--accent-sunshine));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .viability-bad {
+            color: var(--danger-dark);
+            background: linear-gradient(to right, var(--danger-dark), var(--danger));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .viability-label {
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            font-weight: 500;
+            margin-top: 4px;
+        }
+        
+        .viability-message {
+            background: rgba(134, 239, 172, 0.15);
+            border: 1px solid var(--accent-mint);
+            color: var(--success-dark);
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-top: var(--spacing-lg);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .viability-message.warning {
+            background: rgba(253, 230, 138, 0.15);
+            border-color: var(--accent-sunshine);
+            color: var(--warning-dark);
+        }
+        
+        .viability-message.critical {
+            background: rgba(252, 165, 165, 0.15);
+            border-color: var(--danger);
+            color: var(--danger-dark);
+        }
+        
+        .viability-message::before {
+            content: "✓";
+            position: absolute;
+            left: var(--spacing-md);
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            font-size: 2rem;
+            opacity: 0.15;
+            font-family: Arial, sans-serif;
+        }
+        
+        .viability-message.warning::before {
+            content: "⚠";
+        }
+        
+        .viability-message.critical::before {
+            content: "✗";
+        }
+        
+        /* Presets */
+        .presets-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .preset-btn {
+            background: var(--background-card);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg) var(--spacing-md);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-sm);
+            min-height: 130px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .preset-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .preset-btn.active {
+            background: linear-gradient(145deg, rgba(165, 180, 252, 0.15), rgba(199, 210, 254, 0.25));
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.25);
+            transform: translateY(-3px);
+        }
+        
+        .preset-icon {
+            font-size: 2.2rem;
+            margin-bottom: var(--spacing-xs);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(165, 180, 252, 0.15);
+            color: var(--primary-dark);
+            font-weight: bold;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .preset-btn.active .preset-icon {
+            background: rgba(165, 180, 252, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(165, 180, 252, 0.3);
+        }
+        
+        .preset-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-top: 4px;
+        }
+        
+        .preset-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: auto;
+            font-weight: 300;
+        }
+        
+        /* Space Usage */
+        .space-container {
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .space-bar {
+            height: 20px;
+            background: var(--background-light);
+            border-radius: var(--radius-full);
+            margin: var(--spacing-md) 0;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .space-used {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent-peach));
+            border-radius: var(--radius-full);
+            width: 0%;
+            transition: width 1s ease;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .space-used::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.2) 100%);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .space-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-top: var(--spacing-xs);
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+        }
+        
+        /* Account Management */
+        .account-form {
+            background: var(--background-light);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-xl) 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .account-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .account-list {
+            margin-top: var(--spacing-lg);
+            display: grid;
+            gap: var(--spacing-sm);
+        }
+        
+        .account-item {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--background-card);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            align-items: center;
+            border-left: 5px solid var(--primary);
+            transition: var(--transition-fast);
+        }
+        
+        .account-item:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+            border-left-width: 8px;
+        }
+        
+        .account-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+        
+        .account-space {
+            background: rgba(165, 180, 252, 0.15);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            border: 1px solid var(--primary-light);
+        }
+        
+        .account-actions button {
+            background: none;
+            border: none;
+            color: var(--danger-dark);
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: var(--spacing-md);
+            transition: var(--transition-fast);
+            font-size: 1.4rem;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .account-actions button:hover {
+            background: rgba(252, 165, 165, 0.2);
+            transform: scale(1.3);
+            color: var(--danger);
+        }
+        
+        /* Objectives Section */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-md);
+        }
+        
+        .objective-card {
+            background: var(--background-card);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .objective-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent-peach));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+            z-index: 1;
+        }
+        
+        .objective-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .objective-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+        
+        .objective-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .objective-value {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary-dark), var(--secondary-dark), var(--accent-peach));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: var(--spacing-sm) 0;
+            font-family: var(--font-heading);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .objective-desc {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-top: var(--spacing-xs);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: white;
+        }
+        
+        th {
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+            color: white;
+            padding: var(--spacing-md) var(--spacing-lg);
+            text-align: left;
+            font-weight: 700;
+            font-size: 1rem;
+            position: sticky;
+            top: 0;
+        }
+        
+        th:first-child {
+            border-top-left-radius: var(--radius-md);
+        }
+        
+        th:last-child {
+            border-top-right-radius: var(--radius-md);
+        }
+        
+        td {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-dark);
+            background: var(--background-card);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover td {
+            background: rgba(165, 180, 252, 0.08);
+        }
+        
+        tfoot td {
+            font-weight: 800;
+            background: var(--background-light);
+            color: var(--primary-dark);
+            font-size: 1.15rem;
+            border-top: 2px solid var(--border-color);
+        }
+        
+        /* Export Button */
+        .export-btn {
+            background: linear-gradient(to right, var(--accent-mint), #22c55e);
+            color: white;
+            border: none;
+            padding: var(--spacing-lg) var(--spacing-xl);
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+            box-shadow: 0 5px 25px rgba(34, 197, 94, 0.35);
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .export-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.8s;
+        }
+        
+        .export-btn:hover::after {
+            left: 100%;
+        }
+        
+        .export-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(34, 197, 94, 0.45);
+        }
+        
+        .export-btn:active {
+            transform: translateY(1px);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: var(--spacing-2xl);
+            padding: var(--spacing-lg) var(--spacing-md);
+            color: var(--text-medium);
+            font-size: 1rem;
+            border-top: 1px solid var(--border-color);
+            background: var(--background-card);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .plans-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .price-grid, .summary-grid, .viability-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: var(--spacing-lg);
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .logo {
+                font-size: 2.4rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .plans-container {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            
+            .presets-container {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            
+            .price-card, .summary-item, .viability-item {
+                padding: var(--spacing-md);
+            }
+            
+            .price-amount {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-sm);
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .export-btn {
+                font-size: 1.1rem;
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo">CLOUD<span style="background: linear-gradient(to right, var(--accent-peach), var(--accent-coral)); -webkit-background-clip: text; background-clip: text; color: transparent;">HUB</span></div>
+            </div>
+            <h1>Calculadora de Hosting Reseller</h1>
+            <p class="logo-subtitle">Optimiza tu rentabilidad y proyecta el crecimiento de tu negocio de hosting con precisión ejecutiva</p>
+            <div class="header-highlight">Análisis Financiero • Proyecciones • Optimización de Recursos</div>
+        </header>
+        
+        <section class="section">
+            <div class="section-title">
+                <h2>Selecciona tu Plan Reseller</h2>
+                <button class="add-plan-btn" id="addPlanBtn">
+                    <span>+</span> Agregar Plan Personalizado
+                </button>
+            </div>
+            <p class="section-subtitle">Elige uno o más planes para analizar su rentabilidad y configurar tu estrategia comercial</p>
+            
+            <div class="custom-plan-form" id="customPlanForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="planName">Nombre del Plan</label>
+                        <input type="text" id="planName" placeholder="Ej: Reseller Pro">
+                    </div>
+                    <div class="form-group">
+                        <label for="planCost">Costo Mensual ($)</label>
+                        <input type="number" id="planCost" placeholder="11900" min="1000">
+                    </div>
+                    <div class="form-group">
+                        <label for="planAccounts">Cuentas</label>
+                        <input type="number" id="planAccounts" placeholder="5" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="planSpace">Espacio Total (GB)</label>
+                        <input type="number" id="planSpace" placeholder="100" min="10">
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="savePlanBtn">Guardar Plan</button>
+                    <button class="btn btn-secondary" id="cancelPlanBtn">Cancelar</button>
+                </div>
+            </div>
+            
+            <div class="plans-container" id="plansContainer">
+                <!-- Plans will be dynamically inserted here -->
+            </div>
+            
+            <div class="selected-plans">
+                <h3>Planes Seleccionados</h3>
+                <div class="plans-list" id="selectedPlansList">
+                    <div class="empty-state" id="noPlansMessage">
+                        No hay planes seleccionados. Selecciona al menos un plan para comenzar el análisis.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <h2>Configuración de Parámetros Financieros</h2>
+            </div>
+            <p class="section-subtitle">Ajusta los márgenes y descuentos para reflejar tu estrategia comercial específica</p>
+            <div class="grid-2">
+                <div class="input-group">
+                    <label for="profitMargin">Margen de Utilidad (%)</label>
+                    <input type="number" id="profitMargin" value="40" min="0" max="100">
+                </div>
+                <div class="input-group">
+                    <label for="iva">IVA (%)</label>
+                    <input type="number" id="iva" value="19" min="0" max="100">
+                </div>
+                <div class="input-group">
+                    <label for="semestralDiscount">Descuento Pago Semestral (%)</label>
+                    <input type="number" id="semestralDiscount" value="10" min="0" max="50">
+                </div>
+                <div class="input-group">
+                    <label for="annualDiscount">Descuento Pago Anual (%)</label>
+                    <input type="number" id="annualDiscount" value="20" min="0" max="60">
+                </div>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; padding: 18px; font-size: 1.3rem; margin-top: 25px; box-shadow: var(--shadow-md);" id="calculateBtn">
+                Calcular Precios y Viabilidad
+            </button>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <h2>Resumen del Plan Seleccionado</h2>
+            </div>
+            <p class="section-subtitle">Visión general de los recursos y costos asociados a tu selección</p>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-label">Plan Reseller</div>
+                    <div class="summary-value" id="summaryPlan">Ninguno</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Costo Mensual</div>
+                    <div class="summary-value" id="summaryMonthlyCost">$0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Costo Anual</div>
+                    <div class="summary-value" id="summaryAnnualCost">$0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Cuentas Disponibles</div>
+                    <div class="summary-value" id="summaryAccounts">0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Espacio Total</div>
+                    <div class="summary-value" id="summarySpace">0 GB</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Costo por Cuenta</div>
+                    <div class="summary-value" id="summaryCostPerAccount">$0</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <h2>Estructura de Precios por Cuenta</h2>
+            </div>
+            <p class="section-subtitle">Precios de venta calculados según tus márgenes y descuentos configurados</p>
+            <div class="price-grid">
+                <div class="price-card">
+                    <div class="price-title">Mensual</div>
+                    <div class="price-amount" id="monthlyPrice">$0</div>
+                    <div class="price-period">por cuenta/mes</div>
+                </div>
+                <div class="price-card best-value">
+                    <div class="price-title">Semestral</div>
+                    <div class="price-amount" id="semestralPrice">$0</div>
+                    <div class="price-period">(6 meses)</div>
+                    <div class="price-gb" id="semestralPriceGB">$0/GB</div>
+                    <div class="price-discount" id="semestralDiscountText">-10% descuento</div>
+                </div>
+                <div class="price-card">
+                    <div class="price-title">Anual</div>
+                    <div class="price-amount" id="annualPrice">$0</div>
+                    <div class="price-period">(12 meses)</div>
+                    <div class="price-gb" id="annualPriceGB">$0/GB</div>
+                    <div class="price-discount" id="annualDiscountText">-20% descuento</div>
+                </div>
+            </div>
+            <div class="formula">
+                Fórmula de cálculo: (Costo base por cuenta × (1 + margen de utilidad)) ÷ Espacio por cuenta
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <h2>Proyección de Rentabilidad</h2>
+            </div>
+            <p class="section-subtitle">Simula diferentes escenarios de ocupación para evaluar la viabilidad financiera</p>
+            <div class="slider-container">
+                <div class="slider-label">
+                    <span>Nivel de Ocupación de Cuentas</span>
+                    <span id="occupancyValue">100%</span>
+                </div>
+                <input type="range" id="occupancySlider" min="0" max="100" value="100">
+                <p style="text-align: center; margin-top: 10px; color: var(--text-light); font-size: 1rem;">
+                    Ajusta el slider para simular diferentes niveles de ocupación y su impacto en la rentabilidad
+                </p>
+            </div>
+            
+            <div class="viability-grid">
+                <div class="viability-item good">
+                    <div class="viability-label">Utilidad Mensual</div>
+                    <div class="viability-value viability-good" id="monthlyProfit">$0</div>
+                    <div class="viability-label" id="monthlyAccounts">(0 cuentas activas)</div>
+                </div>
+                <div class="viability-item good">
+                    <div class="viability-label">Utilidad Semestral</div>
+                    <div class="viability-value viability-good" id="semestralProfit">$0</div>
+                    <div class="viability-label">(6 meses proyectados)</div>
+                </div>
+                <div class="viability-item good">
+                    <div class="viability-label">Utilidad Anual</div>
+                    <div class="viability-value viability-good" id="annualProfit">$0</div>
+                    <div class="viability-label">(12 meses proyectados)</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <h2>Análisis de Viabilidad del Negocio</h2>
+            </div>
+            <p class="section-subtitle">Métricas clave para evaluar la sostenibilidad y rentabilidad de tu operación</p>
+            <div class="viability-grid">
+                <div class="viability-item good">
+                    <div class="viability-label">Punto de Equilibrio</div>
+                    <div class="viability-value viability-good" id="breakEvenPoint">0 cuentas</div>
+                    <div class="viability-label">Para cubrir costos</div>
+                </div>
+                <div class="viability-item good">
+                    <div class="viability-label">Margen de Seguridad</div>
+                    <div class="viability-value viability-good" id="safetyMargin">0%</div>
+                    <div class="viability-label">Sobre punto de equilibrio</div>
+                </div>
+                <div class="viability-item good">
+                    <div class="viability-label">ROI Mensual</div>
+                    <div class="viability-value viability-good" id="monthlyROI">0%</div>
+                    <div class="viability-label">Retorno de inversión</div>
+                </div>
+                <div class="viability-item">
+                    <div class="viability-label">Recuperación Inversión</div>
+                    <div class="viability-value" id="recoveryTime">0 meses</div>
+                    <div class="viability-label">Tiempo estimado</div>
+                </div>
+            </div>
+            <div class="viability-message" id="viabilityMessage">
+                ✅ Este plan presenta una viabilidad excelente: Con solo 3 cuentas vendidas cubres los costos operativos y las restantes generan utilidad neta.
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <h2>🎯 Objetivos Comerciales por Tipo de Reseller</h2>
+            </div>
+            <p class="section-subtitle">Punto de equilibrio y objetivos con margen de seguridad del 20%</p>
+            <div class="objectives-grid" id="objectivesContainer">
+                <!-- Objectives will be dynamically inserted here -->
+            </div>
+            <div class="formula" style="margin-top: 25px; background: rgba(253, 230, 138, 0.15); border-left-color: var(--accent-sunshine);">
+                💡 Nota: El "Punto de equilibrio" muestra las cuentas necesarias para cubrir exactamente el costo del plan. El "Objetivo comercial" incluye un 20% adicional de margen de seguridad sobre el punto de equilibrio.
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <h2>Configuración de Recursos</h2>
+            </div>
+            <p class="section-subtitle">Administra la distribución de espacio entre tus cuentas de cliente</p>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-label">Plan Seleccionado</div>
+                    <div class="summary-value" id="configPlan">Ninguno</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Costo Mensual</div>
+                    <div class="summary-value" id="configMonthlyCost">$0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Cuentas Máximas</div>
+                    <div class="summary-value" id="configMaxAccounts">0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Espacio Total</div>
+                    <div class="summary-value" id="configTotalSpace">0 GB</div>
+                </div>
+            </div>
+            
+            <div class="space-container">
+                <div class="summary-label" style="margin-bottom: 8px; font-weight: 600; color: var(--text-dark);">Espacio Utilizado</div>
+                <div class="space-bar">
+                    <div class="space-used" id="spaceUsedBar" style="width: 0%"></div>
+                </div>
+                <div class="space-text" id="spaceUsedText">
+                    <span>0 GB utilizados</span>
+                    <span>0 GB disponibles</span>
+                </div>
+            </div>
+            
+            <div class="account-form">
+                <div class="section-title" style="margin-bottom: 20px; border: none; padding: 0;">
+                    <h3>Agregar Nueva Cuenta</h3>
+                </div>
+                <div class="account-grid">
+                    <div class="form-group">
+                        <label for="accountSpace">Espacio por Cuenta (GB)</label>
+                        <input type="number" id="accountSpace" value="20" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="accountQuantity">Cantidad de Cuentas</label>
+                        <input type="number" id="accountQuantity" value="1" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="accountName">Nombre del Plan (opcional)</label>
+                        <input type="text" id="accountName" placeholder="Plan Empresarial">
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 1.1rem;" id="addAccountBtn">Agregar Cuenta(s)</button>
+            </div>
+            
+            <div class="section-title" style="margin: 30px 0 15px; padding-bottom: 10px;">
+                <h3>Cuentas Configuradas</h3>
+            </div>
+            <div class="account-list" id="accountList">
+                <div class="empty-state">
+                    No hay cuentas configuradas. Agrega tu primera cuenta para comenzar.
+                </div>
+            </div>
+            
+            <button class="btn btn-danger" style="width: 100%; margin-top: 15px; padding: 16px; font-size: 1.1rem;" id="clearAccountsBtn">Limpiar Configuración</button>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <h2>💡 Presets de Distribución de Espacio</h2>
+            </div>
+            <p class="section-subtitle">Plantillas predefinidas para distribuir eficientemente el espacio entre tus cuentas</p>
+            <div class="presets-container" id="presetsContainer">
+                <!-- Presets will be dynamically inserted here based on selected plan -->
+            </div>
+            <p style="margin-top: 15px; font-size: 1rem; color: var(--text-light); text-align: center;">
+                Los presets distribuyen automáticamente el espacio total entre las cuentas disponibles según la estrategia seleccionada
+            </p>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <h2>Resumen Financiero de Ventas</h2>
+            </div>
+            <p class="section-subtitle">Proyección de ingresos y utilidades basada en tu configuración actual de cuentas</p>
+            <div class="price-grid">
+                <div class="price-item">
+                    <div class="price-label">Ingreso Mensual Total</div>
+                    <div class="price-total" id="totalMonthlyIncome">$0</div>
+                    <div class="price-gb" id="totalMonthlyPriceGB">$0/GB</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-label">Utilidad Neta Mensual</div>
+                    <div class="price-total viability-good" id="totalMonthlyProfit">$0</div>
+                    <div class="price-gb" id="profitMarginText">Margen: 40%</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-label">ROI Mensual</div>
+                    <div class="price-total viability-good" id="projectedROI">0%</div>
+                    <div class="price-gb">Retorno de inversión</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <h2>Detalle de Estructura Comercial</h2>
+            </div>
+            <p class="section-subtitle">Desglose completo de precios y recursos por cada cuenta configurada</p>
+            <div style="overflow-x: auto; margin-top: 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-md);">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plan de Cuenta</th>
+                            <th>Cantidad</th>
+                            <th>Espacio (GB)</th>
+                            <th>Costo Base</th>
+                            <th>Precio Mensual</th>
+                            <th>Precio Semestral</th>
+                            <th>Precio Anual</th>
+                            <th>Total Mensual</th>
+                        </tr>
+                    </thead>
+                    <tbody id="accountsTableBody">
+                        <tr>
+                            <td colspan="8" style="padding: 30px; text-align: center; color: var(--text-light);">
+                                No hay cuentas configuradas. Agrega cuentas para ver el detalle financiero.
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td style="padding: 14px;">TOTALES</td>
+                            <td style="padding: 14px; text-align: center;" id="totalQuantity">0</td>
+                            <td style="padding: 14px; text-align: center;" id="totalSpace">0 GB</td>
+                            <td style="padding: 14px; text-align: right;" id="totalBaseCost">$0</td>
+                            <td style="padding: 14px; text-align: right;" id="totalMonthly">$0</td>
+                            <td style="padding: 14px; text-align: right;" id="totalSemestral">$0</td>
+                            <td style="padding: 14px; text-align: right;" id="totalAnnual">$0</td>
+                            <td style="padding: 14px; text-align: right;" id="grandTotal">$0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <button class="export-btn" id="exportBtn">
+                <span>📥</span> Exportar Análisis Completo a Excel (CSV)
+            </button>
+        </section>
+        
+        <footer>
+            <p>Calculadora de Hosting Reseller • Versión Pastel Ejecutiva 3.0</p>
+            <p>Todos los precios en CLP (Pesos Chilenos) • Análisis confidencial para uso interno</p>
+            <p style="margin-top: 8px; font-weight: 600;">© 2026 CloudHub Solutions • Transformando Negocios Digitales</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial plans data
+            const initialPlans = [
+                { id: 1, name: 'Reseller 5C', cost: 11900, accounts: 5, space: 100 },
+                { id: 2, name: 'Reseller 10C', cost: 17850, accounts: 10, space: 200 },
+                { id: 3, name: 'Reseller 20C', cost: 29750, accounts: 20, space: 500 },
+                { id: 4, name: 'Reseller 50C', cost: 41650, accounts: 50, space: 1024 },
+                { id: 5, name: 'Reseller 100C', cost: 59500, accounts: 100, space: 2048 }
+            ];
+            
+            // State variables
+            let selectedPlans = [];
+            let customPlans = [];
+            let accounts = [];
+            let currentPlanId = 6; // For custom plans
+            
+            // DOM Elements
+            const plansContainer = document.getElementById('plansContainer');
+            const selectedPlansList = document.getElementById('selectedPlansList');
+            const noPlansMessage = document.getElementById('noPlansMessage');
+            const customPlanForm = document.getElementById('customPlanForm');
+            const addPlanBtn = document.getElementById('addPlanBtn');
+            const savePlanBtn = document.getElementById('savePlanBtn');
+            const cancelPlanBtn = document.getElementById('cancelPlanBtn');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const occupancySlider = document.getElementById('occupancySlider');
+            const occupancyValue = document.getElementById('occupancyValue');
+            const presetsContainer = document.getElementById('presetsContainer');
+            const addAccountBtn = document.getElementById('addAccountBtn');
+            const clearAccountsBtn = document.getElementById('clearAccountsBtn');
+            const exportBtn = document.getElementById('exportBtn');
+            
+            // Initialize the app
+            renderPlans();
+            renderSelectedPlans();
+            renderPresets();
+            renderObjectives();
+            calculateResults();
+            
+            // Event Listeners
+            addPlanBtn.addEventListener('click', () => {
+                customPlanForm.style.display = 'block';
+                addPlanBtn.style.display = 'none';
+            });
+            
+            cancelPlanBtn.addEventListener('click', () => {
+                customPlanForm.style.display = 'none';
+                addPlanBtn.style.display = 'flex';
+                document.getElementById('planName').value = '';
+                document.getElementById('planCost').value = '';
+                document.getElementById('planAccounts').value = '';
+                document.getElementById('planSpace').value = '';
+            });
+            
+            savePlanBtn.addEventListener('click', () => {
+                const name = document.getElementById('planName').value.trim();
+                const cost = parseFloat(document.getElementById('planCost').value);
+                const accounts = parseInt(document.getElementById('planAccounts').value);
+                const space = parseInt(document.getElementById('planSpace').value);
+                
+                if (!name || isNaN(cost) || isNaN(accounts) || isNaN(space) || cost <= 0 || accounts <= 0 || space <= 0) {
+                    alert('Por favor completa todos los campos con valores válidos');
+                    return;
+                }
+                
+                const newPlan = {
+                    id: currentPlanId++,
+                    name: name,
+                    cost: cost,
+                    accounts: accounts,
+                    space: space,
+                    isCustom: true
+                };
+                
+                customPlans.push(newPlan);
+                selectedPlans.push({...newPlan, instances: 1});
+                
+                customPlanForm.style.display = 'none';
+                addPlanBtn.style.display = 'flex';
+                document.getElementById('planName').value = '';
+                document.getElementById('planCost').value = '';
+                document.getElementById('planAccounts').value = '';
+                document.getElementById('planSpace').value = '';
+                
+                renderPlans();
+                renderSelectedPlans();
+                renderPresets();
+                calculateResults();
+            });
+            
+            calculateBtn.addEventListener('click', calculateResults);
+            
+            occupancySlider.addEventListener('input', function() {
+                occupancyValue.textContent = `${this.value}%`;
+                calculateResults();
+            });
+            
+            addAccountBtn.addEventListener('click', addAccount);
+            clearAccountsBtn.addEventListener('click', clearAccounts);
+            exportBtn.addEventListener('click', exportToCSV);
+            
+            // Functions
+            function renderPlans() {
+                plansContainer.innerHTML = '';
+                
+                // Combine initial plans and custom plans
+                const allPlans = [...initialPlans, ...customPlans];
+                
+                allPlans.forEach(plan => {
+                    const planElement = document.createElement('div');
+                    planElement.className = 'plan-card';
+                    if (selectedPlans.some(p => p.id === plan.id)) {
+                        planElement.classList.add('selected');
+                    }
+                    planElement.innerHTML = `
+                        <button class="remove-btn" data-id="${plan.id}">×</button>
+                        <div class="plan-name">${plan.name}</div>
+                        <div class="plan-price">$${plan.cost.toLocaleString('es-CL')}</div>
+                        <div class="plan-details">
+                            <span>${plan.accounts} cuentas</span>
+                            <span>${plan.space >= 1024 ? (plan.space/1024).toFixed(1) + ' TB' : plan.space + ' GB'}</span>
+                        </div>
+                        <div class="plan-badge">Plan Estándar</div>
+                    `;
+                    
+                    if (plan.isCustom) {
+                        planElement.querySelector('.plan-badge').textContent = 'Personalizado';
+                        planElement.querySelector('.plan-badge').style.background = 'rgba(216, 180, 254, 0.25)';
+                        planElement.querySelector('.plan-badge').style.color = '#9333ea';
+                        planElement.querySelector('.plan-badge').style.borderColor = 'rgba(216, 180, 254, 0.5)';
+                    }
+                    
+                    // Add click event to select/deselect plan
+                    planElement.addEventListener('click', (e) => {
+                        if (e.target.classList.contains('remove-btn')) return;
+                        
+                        const existingPlan = selectedPlans.find(p => p.id === plan.id);
+                        if (existingPlan) {
+                            // Deselect plan
+                            selectedPlans = selectedPlans.filter(p => p.id !== plan.id);
+                        } else {
+                            // Select plan
+                            selectedPlans.push({...plan, instances: 1});
+                        }
+                        
+                        renderSelectedPlans();
+                        renderPresets();
+                        calculateResults();
+                    });
+                    
+                    // Add remove event for custom plans
+                    if (plan.isCustom) {
+                        const removeBtn = planElement.querySelector('.remove-btn');
+                        removeBtn.style.display = 'flex';
+                        removeBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            if (confirm(`¿Estás seguro de eliminar el plan "${plan.name}"?`)) {
+                                customPlans = customPlans.filter(p => p.id !== plan.id);
+                                selectedPlans = selectedPlans.filter(p => p.id !== plan.id);
+                                renderPlans();
+                                renderSelectedPlans();
+                                renderPresets();
+                                calculateResults();
+                            }
+                        });
+                    }
+                    
+                    plansContainer.appendChild(planElement);
+                });
+            }
+            
+            function renderSelectedPlans() {
+                if (selectedPlans.length === 0) {
+                    noPlansMessage.style.display = 'block';
+                    selectedPlansList.innerHTML = '';
+                    selectedPlansList.appendChild(noPlansMessage);
+                    return;
+                }
+                
+                noPlansMessage.style.display = 'none';
+                selectedPlansList.innerHTML = '';
+                
+                selectedPlans.forEach(plan => {
+                    const planTag = document.createElement('div');
+                    planTag.className = 'plan-tag';
+                    planTag.innerHTML = `
+                        ${plan.name} × ${plan.instances}
+                        <span class="remove-plan" data-id="${plan.id}">×</span>
+                    `;
+                    
+                    planTag.querySelector('.remove-plan').addEventListener('click', () => {
+                        selectedPlans = selectedPlans.filter(p => p.id !== plan.id);
+                        renderSelectedPlans();
+                        renderPresets();
+                        calculateResults();
+                    });
+                    
+                    selectedPlansList.appendChild(planTag);
+                });
+            }
+            
+            function renderPresets() {
+                presetsContainer.innerHTML = '';
+                
+                if (selectedPlans.length === 0) {
+                    presetsContainer.innerHTML = '<div style="grid-column: span all; text-align: center; padding: 25px; color: var(--text-light); font-style: italic;">Selecciona un plan para ver opciones de distribución</div>';
+                    return;
+                }
+                
+                // Calculate total space and accounts from selected plans
+                const totalSpace = selectedPlans.reduce((sum, plan) => sum + (plan.space * plan.instances), 0);
+                const totalAccounts = selectedPlans.reduce((sum, plan) => sum + (plan.accounts * plan.instances), 0);
+                
+                // Generate at least 6 presets based on the total space and accounts
+                const presets = [
+                    {
+                        name: '⚖️ Balanceado',
+                        description: 'Distribución equitativa',
+                        distribution: () => {
+                            const spacePerAccount = Math.floor(totalSpace / totalAccounts);
+                            return Array(totalAccounts).fill(spacePerAccount);
+                        }
+                    },
+                    {
+                        name: '📱 Pequeñas',
+                        description: 'Muchas cuentas pequeñas',
+                        distribution: () => {
+                            const smallAccounts = Math.min(totalAccounts, Math.floor(totalSpace / 5));
+                            const accountsArray = Array(smallAccounts).fill(5);
+                            const remainingSpace = totalSpace - (smallAccounts * 5);
+                            if (remainingSpace > 0 && accountsArray.length < totalAccounts) {
+                                accountsArray.push(remainingSpace);
+                            }
+                            return accountsArray.slice(0, totalAccounts);
+                        }
+                    },
+                    {
+                        name: '🎭 Mixto',
+                        description: 'Variadas capacidades',
+                        distribution: () => {
+                            const accountsArray = [];
+                            let remainingSpace = totalSpace;
+                            let remainingAccounts = totalAccounts;
+                            
+                            // Add some small accounts
+                            const smallCount = Math.min(Math.floor(totalAccounts * 0.4), Math.floor(totalSpace / 10));
+                            for (let i = 0; i < smallCount && remainingAccounts > 0; i++) {
+                                accountsArray.push(10);
+                                remainingSpace -= 10;
+                                remainingAccounts--;
+                            }
+                            
+                            // Add medium accounts
+                            const mediumCount = Math.min(Math.floor(totalAccounts * 0.4), Math.floor(remainingSpace / 25));
+                            for (let i = 0; i < mediumCount && remainingAccounts > 0; i++) {
+                                accountsArray.push(25);
+                                remainingSpace -= 25;
+                                remainingAccounts--;
+                            }
+                            
+                            // Add large accounts with remaining space
+                            if (remainingAccounts > 0 && remainingSpace > 0) {
+                                const largeSize = Math.floor(remainingSpace / remainingAccounts);
+                                for (let i = 0; i < remainingAccounts; i++) {
+                                    accountsArray.push(largeSize);
+                                }
+                            }
+                            
+                            return accountsArray.slice(0, totalAccounts);
+                        }
+                    },
+                    {
+                        name: '⭐ Premium',
+                        description: 'Pocas cuentas grandes',
+                        distribution: () => {
+                            const largeSize = Math.floor(totalSpace / Math.max(1, Math.floor(totalAccounts * 0.3)));
+                            const largeCount = Math.min(Math.floor(totalAccounts * 0.3), Math.floor(totalSpace / largeSize));
+                            const accountsArray = Array(largeCount).fill(largeSize);
+                            
+                            // Fill remaining with small accounts
+                            const remainingSpace = totalSpace - (largeCount * largeSize);
+                            const remainingAccounts = totalAccounts - largeCount;
+                            if (remainingAccounts > 0 && remainingSpace > 0) {
+                                const smallSize = Math.floor(remainingSpace / remainingAccounts);
+                                for (let i = 0; i < remainingAccounts; i++) {
+                                    accountsArray.push(smallSize);
+                                }
+                            }
+                            
+                            return accountsArray.slice(0, totalAccounts);
+                        }
+                    },
+                    {
+                        name: '🚀 Emprendedor',
+                        description: 'Ideal para startups',
+                        distribution: () => {
+                            const accountsArray = [];
+                            // First 20% get 5GB
+                            const smallCount = Math.min(Math.floor(totalAccounts * 0.2), Math.floor(totalSpace / 5));
+                            for (let i = 0; i < smallCount; i++) accountsArray.push(5);
+                            
+                            // Next 50% get 15GB
+                            const mediumCount = Math.min(Math.floor(totalAccounts * 0.5), Math.floor((totalSpace - accountsArray.reduce((a,b) => a+b, 0)) / 15));
+                            for (let i = 0; i < mediumCount; i++) accountsArray.push(15);
+                            
+                            // Remaining get the rest
+                            const remainingSpace = totalSpace - accountsArray.reduce((a,b) => a+b, 0);
+                            const remainingAccounts = totalAccounts - accountsArray.length;
+                            if (remainingAccounts > 0) {
+                                const largeSize = Math.floor(remainingSpace / remainingAccounts);
+                                for (let i = 0; i < remainingAccounts; i++) accountsArray.push(largeSize);
+                            }
+                            
+                            return accountsArray.slice(0, totalAccounts);
+                        }
+                    },
+                    {
+                        name: '🏢 Empresarial',
+                        description: 'Para empresas consolidadas',
+                        distribution: () => {
+                            const accountsArray = [];
+                            // First 30% get 50GB
+                            const largeCount = Math.min(Math.floor(totalAccounts * 0.3), Math.floor(totalSpace / 50));
+                            for (let i = 0; i < largeCount; i++) accountsArray.push(50);
+                            
+                            // Next 40% get 20GB
+                            const mediumCount = Math.min(Math.floor(totalAccounts * 0.4), Math.floor((totalSpace - accountsArray.reduce((a,b) => a+b, 0)) / 20));
+                            for (let i = 0; i < mediumCount; i++) accountsArray.push(20);
+                            
+                            // Remaining get 10GB
+                            const remainingSpace = totalSpace - accountsArray.reduce((a,b) => a+b, 0);
+                            const remainingAccounts = totalAccounts - accountsArray.length;
+                            if (remainingAccounts > 0) {
+                                const smallSize = Math.floor(remainingSpace / remainingAccounts);
+                                for (let i = 0; i < remainingAccounts; i++) accountsArray.push(Math.max(5, smallSize));
+                            }
+                            
+                            return accountsArray.slice(0, totalAccounts);
+                        }
+                    },
+                    {
+                        name: '🌱 Crecimiento',
+                        description: 'Escalable progresivo',
+                        distribution: () => {
+                            const accountsArray = [];
+                            let remainingSpace = totalSpace;
+                            
+                            // Create a gradient distribution
+                            for (let i = 0; i < totalAccounts; i++) {
+                                const size = Math.floor(remainingSpace / (totalAccounts - i) * 0.8);
+                                accountsArray.push(Math.max(5, size));
+                                remainingSpace -= accountsArray[i];
+                            }
+                            
+                            // Distribute any remaining space
+                            let i = 0;
+                            while (remainingSpace > 0) {
+                                accountsArray[i % totalAccounts] += 1;
+                                remainingSpace--;
+                                i++;
+                            }
+                            
+                            return accountsArray;
+                        }
+                    },
+                    {
+                        name: '💎 Elite',
+                        description: 'Alto valor por cuenta',
+                        distribution: () => {
+                            const accountsArray = [];
+                            const highValueCount = Math.min(Math.floor(totalAccounts * 0.25), Math.floor(totalSpace / 100));
+                            
+                            // 25% of accounts get 100GB each
+                            for (let i = 0; i < highValueCount; i++) {
+                                accountsArray.push(100);
+                            }
+                            
+                            // Remaining accounts share the rest
+                            const remainingSpace = totalSpace - (highValueCount * 100);
+                            const remainingAccounts = totalAccounts - highValueCount;
+                            
+                            if (remainingAccounts > 0) {
+                                const size = Math.floor(remainingSpace / remainingAccounts);
+                                for (let i = 0; i < remainingAccounts; i++) {
+                                    accountsArray.push(Math.max(10, size));
+                                }
+                            }
+                            
+                            return accountsArray.slice(0, totalAccounts);
+                        }
+                    }
+                ];
+                
+                // Create preset buttons
+                presets.forEach((preset, index) => {
+                    const presetBtn = document.createElement('div');
+                    presetBtn.className = 'preset-btn';
+                    if (index === 0) presetBtn.classList.add('active');
+                    presetBtn.innerHTML = `
+                        <div class="preset-icon">${preset.name.split(' ')[0]}</div>
+                        <div class="preset-name">${preset.name.split(' ').slice(1).join(' ')}</div>
+                        <div class="preset-desc">${preset.description}</div>
+                    `;
+                    
+                    presetBtn.addEventListener('click', () => {
+                        // Apply this preset distribution
+                        accounts = [];
+                        const distribution = preset.distribution();
+                        
+                        distribution.forEach((space, i) => {
+                            accounts.push({
+                                id: i + 1,
+                                name: `Plan ${i + 1}`,
+                                space: space,
+                                quantity: 1
+                            });
+                        });
+                        
+                        // Update UI
+                        document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+                        presetBtn.classList.add('active');
+                        renderAccounts();
+                        calculateResults();
+                    });
+                    
+                    presetsContainer.appendChild(presetBtn);
+                });
+            }
+            
+            function renderObjectives() {
+                const objectivesContainer = document.getElementById('objectivesContainer');
+                objectivesContainer.innerHTML = '';
+                
+                // Create objective cards for each plan
+                initialPlans.forEach(plan => {
+                    // Calculate break even point for this plan
+                    const costPerAccount = plan.cost / plan.accounts;
+                    const spacePerAccount = plan.space / plan.accounts;
+                    const profitMargin = 0.4; // 40% default
+                    const pricePerAccount = Math.round(costPerAccount * (1 + profitMargin));
+                    const breakEvenPoint = Math.ceil(plan.cost / pricePerAccount);
+                    const targetWithSafety = Math.ceil(breakEvenPoint * 1.2);
+                    
+                    const objectiveCard = document.createElement('div');
+                    objectiveCard.className = 'objective-card';
+                    objectiveCard.innerHTML = `
+                        <div class="objective-title">${plan.name}</div>
+                        <div class="objective-value">${breakEvenPoint}</div>
+                        <div class="objective-desc">Punto de equilibrio</div>
+                        <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border-color);">
+                            <div class="objective-value" style="font-size: 2.2rem;">${targetWithSafety}</div>
+                            <div class="objective-desc">Objetivo comercial (con 20% margen)</div>
+                        </div>
+                    `;
+                    objectivesContainer.appendChild(objectiveCard);
+                });
+            }
+            
+            function addAccount() {
+                const space = parseInt(document.getElementById('accountSpace').value);
+                const quantity = parseInt(document.getElementById('accountQuantity').value);
+                const name = document.getElementById('accountName').value.trim() || 'Plan Personalizado';
+                
+                if (isNaN(space) || space <= 0 || isNaN(quantity) || quantity <= 0) {
+                    alert('Por favor ingresa valores válidos para el espacio y la cantidad');
+                    return;
+                }
+                
+                // Calculate total space needed
+                const totalSpaceNeeded = accounts.reduce((sum, acc) => sum + (acc.space * acc.quantity), 0) + (space * quantity);
+                const maxSpace = selectedPlans.reduce((sum, plan) => sum + (plan.space * plan.instances), 0);
+                
+                if (totalSpaceNeeded > maxSpace) {
+                    alert(`No hay suficiente espacio. Espacio total: ${maxSpace} GB, Espacio requerido: ${totalSpaceNeeded} GB`);
+                    return;
+                }
+                
+                // Calculate total accounts needed
+                const totalAccountsNeeded = accounts.reduce((sum, acc) => sum + acc.quantity, 0) + quantity;
+                const maxAccounts = selectedPlans.reduce((sum, plan) => sum + (plan.accounts * plan.instances), 0);
+                
+                if (totalAccountsNeeded > maxAccounts) {
+                    alert(`No hay suficientes cuentas disponibles. Cuentas totales: ${maxAccounts}, Cuentas requeridas: ${totalAccountsNeeded}`);
+                    return;
+                }
+                
+                // Add account(s)
+                for (let i = 0; i < quantity; i++) {
+                    accounts.push({
+                        id: Date.now() + i,
+                        name: quantity > 1 ? `${name} ${i + 1}` : name,
+                        space: space,
+                        quantity: 1
+                    });
+                }
+                
+                renderAccounts();
+                calculateResults();
+            }
+            
+            function clearAccounts() {
+                if (accounts.length === 0) return;
+                
+                if (confirm('¿Estás seguro de eliminar todas las cuentas configuradas?')) {
+                    accounts = [];
+                    renderAccounts();
+                    calculateResults();
+                }
+            }
+            
+            function renderAccounts() {
+                const accountList = document.getElementById('accountList');
+                const accountsTableBody = document.getElementById('accountsTableBody');
+                
+                if (accounts.length === 0) {
+                    accountList.innerHTML = '<div class="empty-state">No hay cuentas configuradas. Agrega tu primera cuenta.</div>';
+                    accountsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="8" style="padding: 30px; text-align: center; color: var(--text-light);">
+                                No hay cuentas configuradas. Agrega cuentas para ver el detalle financiero.
+                            </td>
+                        </tr>
+                    `;
+                    document.getElementById('totalQuantity').textContent = '0';
+                    document.getElementById('totalSpace').textContent = '0 GB';
+                    document.getElementById('totalBaseCost').textContent = '$0';
+                    document.getElementById('totalMonthly').textContent = '$0';
+                    document.getElementById('totalSemestral').textContent = '$0';
+                    document.getElementById('totalAnnual').textContent = '$0';
+                    document.getElementById('grandTotal').textContent = '$0';
+                    return;
+                }
+                
+                // Render account list
+                accountList.innerHTML = '';
+                accounts.forEach(account => {
+                    const accountItem = document.createElement('div');
+                    accountItem.className = 'account-item';
+                    accountItem.innerHTML = `
+                        <div>
+                            <div class="account-name">${account.name}</div>
+                            <div class="account-space">${account.space} GB</div>
+                        </div>
+                        <div class="account-actions">
+                            <button class="remove-account" data-id="${account.id}">×</button>
+                        </div>
+                    `;
+                    accountList.appendChild(accountItem);
+                });
+                
+                // Add remove functionality
+                document.querySelectorAll('.remove-account').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = parseInt(button.getAttribute('data-id'));
+                        accounts = accounts.filter(acc => acc.id !== id);
+                        renderAccounts();
+                        calculateResults();
+                    });
+                });
+                
+                // Render table
+                accountsTableBody.innerHTML = '';
+                let totalQuantity = 0;
+                let totalSpace = 0;
+                let totalBaseCost = 0;
+                let totalMonthly = 0;
+                let totalSemestral = 0;
+                let totalAnnual = 0;
+                
+                accounts.forEach(account => {
+                    const baseCost = calculateBaseCost(account.space);
+                    const monthlyPrice = calculateMonthlyPrice(account.space);
+                    const semestralPrice = calculateSemestralPrice(monthlyPrice);
+                    const annualPrice = calculateAnnualPrice(monthlyPrice);
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${account.name}</td>
+                        <td style="text-align: center;">${account.quantity}</td>
+                        <td style="text-align: center;">${account.space}</td>
+                        <td style="text-align: right;">$${baseCost.toLocaleString('es-CL')}</td>
+                        <td style="text-align: right;">$${monthlyPrice.toLocaleString('es-CL')}</td>
+                        <td style="text-align: right;">$${semestralPrice.toLocaleString('es-CL')}</td>
+                        <td style="text-align: right;">$${annualPrice.toLocaleString('es-CL')}</td>
+                        <td style="text-align: right;">$${(monthlyPrice * account.quantity).toLocaleString('es-CL')}</td>
+                    `;
+                    accountsTableBody.appendChild(row);
+                    
+                    totalQuantity += account.quantity;
+                    totalSpace += account.space * account.quantity;
+                    totalBaseCost += baseCost * account.quantity;
+                    totalMonthly += monthlyPrice * account.quantity;
+                    totalSemestral += semestralPrice * account.quantity;
+                    totalAnnual += annualPrice * account.quantity;
+                });
+                
+                // Update totals
+                document.getElementById('totalQuantity').textContent = totalQuantity;
+                document.getElementById('totalSpace').textContent = `${totalSpace} GB`;
+                document.getElementById('totalBaseCost').textContent = `$${totalBaseCost.toLocaleString('es-CL')}`;
+                document.getElementById('totalMonthly').textContent = `$${totalMonthly.toLocaleString('es-CL')}`;
+                document.getElementById('totalSemestral').textContent = `$${totalSemestral.toLocaleString('es-CL')}`;
+                document.getElementById('totalAnnual').textContent = `$${totalAnnual.toLocaleString('es-CL')}`;
+                document.getElementById('grandTotal').textContent = `$${totalMonthly.toLocaleString('es-CL')}`;
+                
+                // Update space usage bar
+                const maxSpace = selectedPlans.reduce((sum, plan) => sum + (plan.space * plan.instances), 0);
+                const spaceUsedBar = document.getElementById('spaceUsedBar');
+                const spaceUsedText = document.getElementById('spaceUsedText');
+                
+                const percentUsed = Math.min(100, Math.round((totalSpace / maxSpace) * 100));
+                spaceUsedBar.style.width = `${percentUsed}%`;
+                spaceUsedText.innerHTML = `
+                    <span>${totalSpace} GB utilizados</span>
+                    <span>${maxSpace - totalSpace} GB disponibles</span>
+                `;
+            }
+            
+            function calculateBaseCost(space) {
+                if (selectedPlans.length === 0) return 0;
+                
+                const totalSpace = selectedPlans.reduce((sum, plan) => sum + (plan.space * plan.instances), 0);
+                const totalCost = selectedPlans.reduce((sum, plan) => sum + (plan.cost * plan.instances), 0);
+                
+                return Math.round((totalCost / totalSpace) * space);
+            }
+            
+            function calculateMonthlyPrice(space) {
+                const profitMargin = parseFloat(document.getElementById('profitMargin').value) / 100;
+                const baseCost = calculateBaseCost(space);
+                return Math.round(baseCost * (1 + profitMargin));
+            }
+            
+            function calculateSemestralPrice(monthlyPrice) {
+                const discount = parseFloat(document.getElementById('semestralDiscount').value) / 100;
+                return Math.round(monthlyPrice * 6 * (1 - discount));
+            }
+            
+            function calculateAnnualPrice(monthlyPrice) {
+                const discount = parseFloat(document.getElementById('annualDiscount').value) / 100;
+                return Math.round(monthlyPrice * 12 * (1 - discount));
+            }
+            
+            function calculateResults() {
+                if (selectedPlans.length === 0) {
+                    // Reset all displays
+                    document.getElementById('summaryPlan').textContent = 'Ninguno';
+                    document.getElementById('summaryMonthlyCost').textContent = '$0';
+                    document.getElementById('summaryAnnualCost').textContent = '$0';
+                    document.getElementById('summaryAccounts').textContent = '0';
+                    document.getElementById('summarySpace').textContent = '0 GB';
+                    document.getElementById('summaryCostPerAccount').textContent = '$0';
+                    
+                    document.getElementById('monthlyPrice').textContent = '$0';
+                    document.getElementById('semestralPrice').textContent = '$0';
+                    document.getElementById('annualPrice').textContent = '$0';
+                    document.getElementById('semestralPriceGB').textContent = '$0/GB';
+                    document.getElementById('annualPriceGB').textContent = '$0/GB';
+                    
+                    document.getElementById('monthlyProfit').textContent = '$0';
+                    document.getElementById('semestralProfit').textContent = '$0';
+                    document.getElementById('annualProfit').textContent = '$0';
+                    document.getElementById('monthlyAccounts').textContent = '(0 cuentas activas)';
+                    
+                    document.getElementById('breakEvenPoint').textContent = '0 cuentas';
+                    document.getElementById('safetyMargin').textContent = '0%';
+                    document.getElementById('monthlyROI').textContent = '0%';
+                    document.getElementById('recoveryTime').textContent = '0 meses';
+                    document.getElementById('viabilityMessage').textContent = 'Selecciona al menos un plan para calcular la viabilidad financiera';
+                    document.getElementById('viabilityMessage').className = 'viability-message warning';
+                    
+                    // Config section
+                    document.getElementById('configPlan').textContent = 'Ninguno';
+                    document.getElementById('configMonthlyCost').textContent = '$0';
+                    document.getElementById('configMaxAccounts').textContent = '0';
+                    document.getElementById('configTotalSpace').textContent = '0 GB';
+                    
+                    // Price section
+                    document.getElementById('totalMonthlyIncome').textContent = '$0';
+                    document.getElementById('totalMonthlyProfit').textContent = '$0';
+                    document.getElementById('projectedROI').textContent = '0%';
+                    document.getElementById('profitMarginText').textContent = `Margen: ${document.getElementById('profitMargin').value}%`;
+                    
+                    return;
+                }
+                
+                // Calculate totals from selected plans
+                const totalMonthlyCost = selectedPlans.reduce((sum, plan) => sum + (plan.cost * plan.instances), 0);
+                const totalAccounts = selectedPlans.reduce((sum, plan) => sum + (plan.accounts * plan.instances), 0);
+                const totalSpace = selectedPlans.reduce((sum, plan) => sum + (plan.space * plan.instances), 0);
+                
+                // Summary section
+                const planNames = selectedPlans.map(plan => `${plan.name} x${plan.instances}`).join(', ');
+                document.getElementById('summaryPlan').textContent = planNames;
+                document.getElementById('summaryMonthlyCost').textContent = `$${totalMonthlyCost.toLocaleString('es-CL')}`;
+                document.getElementById('summaryAnnualCost').textContent = `$${(totalMonthlyCost * 12).toLocaleString('es-CL')}`;
+                document.getElementById('summaryAccounts').textContent = totalAccounts;
+                document.getElementById('summarySpace').textContent = `${totalSpace} GB`;
+                
+                const costPerAccount = Math.round(totalMonthlyCost / totalAccounts);
+                document.getElementById('summaryCostPerAccount').textContent = `$${costPerAccount.toLocaleString('es-CL')}`;
+                
+                // Prices per account
+                const spacePerAccount = Math.floor(totalSpace / totalAccounts);
+                const basePrice = calculateMonthlyPrice(spacePerAccount);
+                document.getElementById('monthlyPrice').textContent = `$${basePrice.toLocaleString('es-CL')}`;
+                document.getElementById('semestralPrice').textContent = `$${calculateSemestralPrice(basePrice).toLocaleString('es-CL')}`;
+                document.getElementById('annualPrice').textContent = `$${calculateAnnualPrice(basePrice).toLocaleString('es-CL')}`;
+                document.getElementById('semestralPriceGB').textContent = `$${Math.round(basePrice / spacePerAccount).toLocaleString('es-CL')}/GB`;
+                document.getElementById('annualPriceGB').textContent = `$${Math.round(basePrice / spacePerAccount).toLocaleString('es-CL')}/GB`;
+                
+                document.getElementById('semestralDiscountText').textContent = `-${document.getElementById('semestralDiscount').value}% descuento`;
+                document.getElementById('annualDiscountText').textContent = `-${document.getElementById('annualDiscount').value}% descuento`;
+                
+                // Profit analysis
+                const occupancy = parseFloat(occupancySlider.value) / 100;
+                const occupiedAccounts = Math.floor(totalAccounts * occupancy);
+                const monthlyIncome = basePrice * occupiedAccounts;
+                const monthlyProfit = monthlyIncome - totalMonthlyCost;
+                const semestralProfit = monthlyProfit * 6;
+                const annualProfit = monthlyProfit * 12;
+                
+                document.getElementById('monthlyProfit').textContent = `$${monthlyProfit.toLocaleString('es-CL')}`;
+                document.getElementById('semestralProfit').textContent = `$${semestralProfit.toLocaleString('es-CL')}`;
+                document.getElementById('annualProfit').textContent = `$${annualProfit.toLocaleString('es-CL')}`;
+                document.getElementById('monthlyAccounts').textContent = `(${occupiedAccounts} cuentas activas)`;
+                
+                // Viability analysis
+                const breakEvenPoint = Math.ceil(totalMonthlyCost / basePrice);
+                const safetyMargin = totalAccounts > 0 ? Math.max(0, Math.round(((totalAccounts - breakEvenPoint) / totalAccounts) * 100)) : 0;
+                const monthlyROI = totalMonthlyCost > 0 ? Math.round((monthlyProfit / totalMonthlyCost) * 100) : 0;
+                const recoveryTime = monthlyProfit > 0 ? Math.round((totalMonthlyCost * 12) / monthlyProfit * 10) / 10 : 0;
+                
+                document.getElementById('breakEvenPoint').textContent = `${breakEvenPoint} cuentas`;
+                document.getElementById('safetyMargin').textContent = `${safetyMargin}%`;
+                document.getElementById('monthlyROI').textContent = `${monthlyROI}%`;
+                document.getElementById('recoveryTime').textContent = `${recoveryTime} meses`;
+                
+                // Viability message
+                const viabilityMessage = document.getElementById('viabilityMessage');
+                if (breakEvenPoint <= totalAccounts * 0.5) {
+                    viabilityMessage.textContent = `✅ Este plan presenta una viabilidad excelente: Con solo ${breakEvenPoint} cuentas vendidas cubres los costos operativos y las ${totalAccounts - breakEvenPoint} restantes generan utilidad neta.`;
+                    viabilityMessage.className = 'viability-message';
+                } else if (breakEvenPoint <= totalAccounts * 0.8) {
+                    viabilityMessage.textContent = `⚠️ Este plan es viable pero requiere esfuerzo comercial: Necesitas vender ${breakEvenPoint} de ${totalAccounts} cuentas para alcanzar el punto de equilibrio.`;
+                    viabilityMessage.className = 'viability-message warning';
+                } else {
+                    viabilityMessage.textContent = `❌ Este plan presenta riesgos financieros: Necesitas vender ${breakEvenPoint} de ${totalAccounts} cuentas solo para cubrir costos. Considera un plan más pequeño o ajustar tus márgenes.`;
+                    viabilityMessage.className = 'viability-message critical';
+                }
+                
+                // Config section
+                document.getElementById('configPlan').textContent = planNames;
+                document.getElementById('configMonthlyCost').textContent = `$${totalMonthlyCost.toLocaleString('es-CL')}`;
+                document.getElementById('configMaxAccounts').textContent = totalAccounts;
+                document.getElementById('configTotalSpace').textContent = `${totalSpace} GB`;
+                
+                // Update space bar if accounts exist
+                if (accounts.length > 0) {
+                    const usedSpace = accounts.reduce((sum, acc) => sum + (acc.space * acc.quantity), 0);
+                    const percentUsed = Math.min(100, Math.round((usedSpace / totalSpace) * 100));
+                    document.getElementById('spaceUsedBar').style.width = `${percentUsed}%`;
+                    document.getElementById('spaceUsedText').innerHTML = `
+                        <span>${usedSpace} GB utilizados</span>
+                        <span>${totalSpace - usedSpace} GB disponibles</span>
+                    `;
+                }
+                
+                // Price section - based on configured accounts
+                if (accounts.length > 0) {
+                    const totalMonthly = accounts.reduce((sum, acc) => {
+                        return sum + (calculateMonthlyPrice(acc.space) * acc.quantity);
+                    }, 0);
+                    
+                    const totalMonthlyProfit = totalMonthly - totalMonthlyCost;
+                    const projectedROI = totalMonthlyCost > 0 ? Math.round((totalMonthlyProfit / totalMonthlyCost) * 100) : 0;
+                    
+                    document.getElementById('totalMonthlyIncome').textContent = `$${totalMonthly.toLocaleString('es-CL')}`;
+                    document.getElementById('totalMonthlyProfit').textContent = `$${totalMonthlyProfit.toLocaleString('es-CL')}`;
+                    document.getElementById('projectedROI').textContent = `${projectedROI}%`;
+                    document.getElementById('profitMarginText').textContent = `Margen: ${document.getElementById('profitMargin').value}%`;
+                } else {
+                    // Use per account price if no accounts configured
+                    const totalPotentialIncome = basePrice * totalAccounts;
+                    const totalPotentialProfit = totalPotentialIncome - totalMonthlyCost;
+                    const projectedROI = totalMonthlyCost > 0 ? Math.round((totalPotentialProfit / totalMonthlyCost) * 100) : 0;
+                    
+                    document.getElementById('totalMonthlyIncome').textContent = `$${totalPotentialIncome.toLocaleString('es-CL')}`;
+                    document.getElementById('totalMonthlyProfit').textContent = `$${totalPotentialProfit.toLocaleString('es-CL')}`;
+                    document.getElementById('projectedROI').textContent = `${projectedROI}%`;
+                    document.getElementById('profitMarginText').textContent = `Margen: ${document.getElementById('profitMargin').value}%`;
+                }
+                
+                // Render accounts table if needed
+                if (accounts.length > 0) {
+                    renderAccounts();
+                }
+            }
+            
+            function exportToCSV() {
+                // Create CSV content
+                let csvContent = "Calculadora de Hosting Reseller - Reporte Completo\n\n";
+                
+                // Section 1: Plan Summary
+                csvContent += "RESUMEN DEL PLAN SELECCIONADO\n";
+                csvContent += "Plan Reseller," + document.getElementById('summaryPlan').textContent + "\n";
+                csvContent += "Costo Mensual," + document.getElementById('summaryMonthlyCost').textContent + "\n";
+                csvContent += "Costo Anual," + document.getElementById('summaryAnnualCost').textContent + "\n";
+                csvContent += "Cuentas Disponibles," + document.getElementById('summaryAccounts').textContent + "\n";
+                csvContent += "Espacio Total," + document.getElementById('summarySpace').textContent + "\n";
+                csvContent += "Costo por Cuenta," + document.getElementById('summaryCostPerAccount').textContent + "\n\n";
+                
+                // Section 2: Price Structure
+                csvContent += "ESTRUCTURA DE PRECIOS POR CUENTA\n";
+                csvContent += "Mensual," + document.getElementById('monthlyPrice').textContent + "\n";
+                csvContent += "Semestral," + document.getElementById('semestralPrice').textContent + "\n";
+                csvContent += "Anual," + document.getElementById('annualPrice').textContent + "\n";
+                csvContent += "Precio por GB (Semestral)," + document.getElementById('semestralPriceGB').textContent + "\n";
+                csvContent += "Precio por GB (Anual)," + document.getElementById('annualPriceGB').textContent + "\n\n";
+                
+                // Section 3: Profit Projection
+                csvContent += "PROYECCIÓN DE RENTABILIDAD\n";
+                csvContent += "Utilidad Mensual," + document.getElementById('monthlyProfit').textContent + "\n";
+                csvContent += "Utilidad Semestral," + document.getElementById('semestralProfit').textContent + "\n";
+                csvContent += "Utilidad Anual," + document.getElementById('annualProfit').textContent + "\n";
+                csvContent += "Cuentas Activas," + document.getElementById('monthlyAccounts').textContent.replace(/\(|\)/g, '') + "\n\n";
+                
+                // Section 4: Business Viability
+                csvContent += "ANÁLISIS DE VIABILIDAD DEL NEGOCIO\n";
+                csvContent += "Punto de Equilibrio," + document.getElementById('breakEvenPoint').textContent + "\n";
+                csvContent += "Margen de Seguridad," + document.getElementById('safetyMargin').textContent + "\n";
+                csvContent += "ROI Mensual," + document.getElementById('monthlyROI').textContent + "\n";
+                csvContent += "Tiempo Recuperación," + document.getElementById('recoveryTime').textContent + "\n";
+                csvContent += "Mensaje de Viabilidad," + document.getElementById('viabilityMessage').textContent + "\n\n";
+                
+                // Section 5: Account Configuration
+                csvContent += "CONFIGURACIÓN DE RECURSOS\n";
+                csvContent += "Plan Seleccionado," + document.getElementById('configPlan').textContent + "\n";
+                csvContent += "Costo Mensual," + document.getElementById('configMonthlyCost').textContent + "\n";
+                csvContent += "Cuentas Máximas," + document.getElementById('configMaxAccounts').textContent + "\n";
+                csvContent += "Espacio Total," + document.getElementById('configTotalSpace').textContent + "\n\n";
+                
+                // Section 6: Account Details Table
+                csvContent += "DETALLE DE CUENTAS Y PRECIOS\n";
+                csvContent += "Plan de Cuenta,Cantidad,Espacio (GB),Costo Base,Precio Mensual,Precio Semestral,Precio Anual,Total Mensual\n";
+                
+                // Get table rows
+                const rows = document.querySelectorAll('#accountsTableBody tr');
+                rows.forEach(row => {
+                    if (row.children.length === 8 && row.children[0].colSpan !== "8") {
+                        const cells = row.children;
+                        let rowArray = [];
+                        for (let i = 0; i < cells.length; i++) {
+                            // Clean the text content
+                            let cellText = cells[i].textContent.trim().replace(/[$.]/g, '').replace(',', '.');
+                            // If it's a number with CLP format, convert to plain number
+                            if (cellText.includes('GB')) {
+                                cellText = cellText.replace('GB', '').trim();
+                            }
+                            rowArray.push('"' + cellText + '"');
+                        }
+                        csvContent += rowArray.join(",") + "\n";
+                    }
+                });
+                
+                // Add totals
+                csvContent += "\nTOTALES," + 
+                    document.getElementById('totalQuantity').textContent + "," +
+                    document.getElementById('totalSpace').textContent.replace(' GB', '') + "," +
+                    document.getElementById('totalBaseCost').textContent.replace('$', '').replace(/\./g, '') + "," +
+                    document.getElementById('totalMonthly').textContent.replace('$', '').replace(/\./g, '') + "," +
+                    document.getElementById('totalSemestral').textContent.replace('$', '').replace(/\./g, '') + "," +
+                    document.getElementById('totalAnnual').textContent.replace('$', '').replace(/\./g, '') + "," +
+                    document.getElementById('grandTotal').textContent.replace('$', '').replace(/\./g, '') + "\n\n";
+                
+                // Section 7: Financial Summary
+                csvContent += "RESUMEN FINANCIERO DE VENTAS\n";
+                csvContent += "Ingreso Mensual Total," + document.getElementById('totalMonthlyIncome').textContent + "\n";
+                csvContent += "Utilidad Neta Mensual," + document.getElementById('totalMonthlyProfit').textContent + "\n";
+                csvContent += "ROI Mensual," + document.getElementById('projectedROI').textContent + "\n";
+                csvContent += "Margen de Utilidad," + document.getElementById('profitMarginText').textContent.replace('Margen: ', '') + "\n\n";
+                
+                // Section 8: Configuration Parameters
+                csvContent += "PARÁMETROS DE CONFIGURACIÓN\n";
+                csvContent += "Margen de Utilidad (%)," + document.getElementById('profitMargin').value + "\n";
+                csvContent += "IVA (%)," + document.getElementById('iva').value + "\n";
+                csvContent += "Descuento Pago Semestral (%)," + document.getElementById('semestralDiscount').value + "\n";
+                csvContent += "Descuento Pago Anual (%)," + document.getElementById('annualDiscount').value + "\n";
+                csvContent += "Nivel de Ocupación (%)," + occupancySlider.value + "\n";
+                
+                // Create blob and download
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.setAttribute("href", url);
+                link.setAttribute("download", "analisis_hosting_reseller_" + new Date().toISOString().slice(0,10) + ".csv");
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Show success message
+                alert("¡Exportación exitosa!\n\nEl archivo CSV ha sido descargado y puede abrirse con Excel o cualquier programa de hojas de cálculo.");
+            }
+            
+            // Initialize with default selection (Reseller 5C)
+            selectedPlans = [{...initialPlans[0], instances: 1}];
+            renderSelectedPlans();
+            calculateResults();
+        });
+    </script>
+</body>
+</html>
+
